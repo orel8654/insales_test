@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from restapi.views import CreateUserAPI
+from restapi.views import CreateUserAPI, index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create/', CreateUserAPI.as_view()),
+    path('start/', index),
 ]

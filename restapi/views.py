@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.core.mail import send_mail
 from service.settings import EMAIL_HOST_USER
+from django.shortcuts import render
 
 class CreateUserAPI(APIView):
 
@@ -28,3 +29,6 @@ class CreateUserAPI(APIView):
             ['egorao@mail.ru'],
         )
         return Response({'status': 'OK'})
+
+def index(request):
+    return render(request, template_name='restapi/index.html', context={})

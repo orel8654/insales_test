@@ -1,10 +1,17 @@
 FROM python:3
-ENV PYTHONDONTWRITEBYTECODE=1
+
+RUN apt-get update && apt-get install
+
+RUN mkdir /codet
+WORKDIR /codet
+
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
-WORKDIR /code
-ADD req.txt /code/
+
+RUN pip install --upgrade pip
+COPY ./req.txt /smartrobot
 RUN pip install -r req.txt
-COPY . /code/
-EXPOSE 8080
-CMD ["python", "manage.py", "runserver", "8080"]
+ADD . /codet
+
+EXPOSE 8020
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8020"]
