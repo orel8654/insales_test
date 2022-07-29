@@ -14,4 +14,4 @@ jobs:
       - run: echo "${{ secrets.key_reg }}" > "$HOME/.ssh/key_reg"
       - run: chmod 600 "$HOME/.ssh/key_reg"
 
-      - run: rsync -e "ssh -i $HOME/.ssh/key_reg -o StrictHostKeyChecking=no" --archive --compress --delete . root@37.140.195.145:/opt/testers/
+      - run: cd service && rsync -e "ssh -i $HOME/.ssh/key_reg -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
