@@ -5,7 +5,16 @@ on:
     branches:
       - main
 jobs:
-  step1:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build Container
+      - working-directory: /.
+      - run: docker build . --file Dockerfile --tag my-app-test:$(date +%s)
+
+  step-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,5 +23,6 @@ jobs:
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
       - run: chmod 600 "$HOME/.ssh/KEY_REG"
-
+      - run: npi ci
+      - run: npi build
       - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
