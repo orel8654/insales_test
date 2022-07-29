@@ -30,6 +30,7 @@ jobs:
 #          docker build --tag django_test .
 
   ssh-scp:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: set -eu
