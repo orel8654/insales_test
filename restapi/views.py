@@ -22,13 +22,13 @@ class CreateUserAPI(APIView):
         print('email: ', param_email)
         print('insales_id: ', param_id)
         print('shop: ', param_shop)
-        send_mail(
-            'Tester//Insales',
-            f'Token: {param_token}\nUser_ID: {param_user_id}\nEMAIL: {param_email}\nINSALES_ID: {param_id}\nSHOP: {param_shop}\n',
-            EMAIL_HOST_USER,
-            ['egorao@mail.ru'],
-        )
-        return Response({'status': 'OK'})
+        # send_mail(
+        #     'Tester//Insales',
+        #     f'Token: {param_token}\nUser_ID: {param_user_id}\nEMAIL: {param_email}\nINSALES_ID: {param_id}\nSHOP: {param_shop}\n',
+        #     EMAIL_HOST_USER,
+        #     ['egorao@mail.ru'],
+        # )
+        return Response({'status': 'OK', 'some': 'good'})
 
 def index(request):
-    return render(request, template_name='restapi/index.html', context={})
+    return render(request)

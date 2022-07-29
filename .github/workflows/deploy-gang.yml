@@ -21,11 +21,15 @@ jobs:
           REPO: orel8654/django-test-pim
           DOCKERFILE: ./Dockerfile
           tags: latest
+
+
 #        run: |
 #          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 #      - name: docker build
 #        run: |
 #          docker build --tag django_test .
+
+#  ssh-scp:
 #    steps:
 #      - uses: actions/checkout@v2
 #      - run: set -eu
