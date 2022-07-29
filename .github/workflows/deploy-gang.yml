@@ -5,14 +5,18 @@ on:
     branches:
       - main
 jobs:
-  step-deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-      - run: set -eu
-      - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
-      - run: chmod 600 "$HOME/.ssh/KEY_REG"
-
-      - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
+      - name: docker build
+        run: |
+          docker build --tag django_test .
+#    steps:
+#      - uses: actions/checkout@v2
+#      - run: set -eu
+#      - run: mkdir "$HOME/.ssh"
+#      - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
+#      - run: chmod 600 "$HOME/.ssh/KEY_REG"
+#
+#      - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/

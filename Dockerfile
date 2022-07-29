@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN pip install --upgrade pip
-COPY ./req.txt /smartrobot
+COPY ./req.txt /codet
 RUN pip install -r req.txt
 ADD . /codet
 
