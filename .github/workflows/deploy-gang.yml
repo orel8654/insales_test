@@ -37,8 +37,8 @@ jobs:
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
       - run: chmod 600 "$HOME/.ssh/KEY_REG"
-#      - run: ssh -i $HOME/.ssh/KEY_REG root@37-140-195-145.cloudvps.regruhosting.ru
       - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
+      - run: ssh -i $HOME/.ssh/KEY_REG root@37-140-195-145.cloudvps.regruhosting.ru
       - run: cd /opt/testers/
       - run: docker stop ttt
       - run: docker build --no-cache -t django-test .
