@@ -48,16 +48,16 @@ jobs:
       - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
       - run: chmod 600 "$HOME/.ssh/KEY_REG"
 #      - run: ssh -i $HOME/.ssh/KEY_REG root@37-140-195-145.cloudvps.regruhosting.ru
-      with:
-        host: 37.140.195.145, 37-140-195-145.cloudvps.regruhosting.ru
-        username: root
-        key: ${{ secrets.KEY_REG }}
-        port: 22
-        script: |
-          cd /opt/testers/
-          docker stop ttt
-          docker build --no-cache -t django-test .
-          docker run -d -p 8020:8020 --name ttt django-test
+        with:
+          host: 37.140.195.145, 37-140-195-145.cloudvps.regruhosting.ru
+          username: root
+          key: ${{ secrets.KEY_REG }}
+          port: 22
+          script: |
+            cd /opt/testers/
+            docker stop ttt
+            docker build --no-cache -t django-test .
+            docker run -d -p 8020:8020 --name ttt django-test
 
 #      - run: cd /opt/testers/
 #      - run: docker stop ttt
