@@ -62,7 +62,6 @@ jobs:
             docker rm ttt
             docker rmi --force django-test
             docker build --tag django-test .
-#            docker build --no-cache -t django-test .
             docker run -d -p 8020:8020 --name ttt django-test
 
 #      - run: cd /opt/testers/
