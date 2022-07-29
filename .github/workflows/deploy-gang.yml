@@ -58,10 +58,10 @@ jobs:
           port: 22
           script: |
             cd /opt/testers/
-            ls
-#            docker stop ttt
-#            docker build --no-cache -t django-test .
-#            docker run -d -p 8020:8020 --name ttt django-test
+            docker stop ttt
+            docker rm ttt
+            docker build --no-cache -t django-test .
+            docker run -d -p 8020:8020 --name ttt django-test
 
 #      - run: cd /opt/testers/
 #      - run: docker stop ttt
