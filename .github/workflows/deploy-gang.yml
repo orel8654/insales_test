@@ -9,5 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Status
-        run: echo "working"
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.key_reg }}" > "$HOME/.ssh/key_reg"
+      - run: chmod 600 "$HOME/.ssh/key_reg"
+
+      - run: rsync -e "ssh -i $HOME/.ssh/key_reg -o StrictHostKeyChecking=no" --archive --compress --delete . root@37.140.195.145 /opt/testers/
