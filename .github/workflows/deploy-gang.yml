@@ -52,7 +52,7 @@ jobs:
 #      - run: ssh -i $HOME/.ssh/KEY_REG root@37-140-195-145.cloudvps.regruhosting.ru
 
         with:
-          host: 37.140.195.145, 37-140-195-145.cloudvps.regruhosting.ru
+          host: 37.140.195.145
           username: root
           key: ${{ secrets.KEY_REG }}
           port: 22
