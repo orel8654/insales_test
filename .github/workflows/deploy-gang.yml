@@ -9,9 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install SSH Key
+          uses: shimataro/ssh-key-action@v2
+          with:
+            key: ${{ secrets.ACTIONS_KEY_REG }}
+
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
-      - run: chmod 600 "$HOME/.ssh/KEY_REG"
+      - run: echo "${{ secrets.ACTIONS_KEY_REG }}" > "$HOME/.ssh/ACTIONS_KEY_REG"
+      - run: chmod 600 "$HOME/.ssh/ACTIONS_KEY_REG"
 
-      - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
+      - run: rsync -e "ssh -i $HOME/.ssh/ACTIONS_KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
