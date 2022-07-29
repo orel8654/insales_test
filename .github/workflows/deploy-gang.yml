@@ -9,4 +9,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      run: echo "working"
+      - name: Print Status
+        run: echo "working"
