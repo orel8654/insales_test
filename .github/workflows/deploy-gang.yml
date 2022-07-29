@@ -5,22 +5,22 @@ on:
     branches:
       - main
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Docker
-        uses: docker/build-push-action@v2
-        with:
-          DOCKER_USER: ${{ secrets.DOC_USER }}
-          DOCKER_PASSWORD: ${{ secrets.DOC_PASS }}
-          REPO: orel8654/django-test-pim
-          DOCKERFILE: ./Dockerfile
-          tags: latest
+#  build-and-deploy:
+#    name: Build and Deploy
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Docker
+#        uses: docker/build-push-action@v2
+#        with:
+#          DOCKER_USER: ${{ secrets.DOC_USER }}
+#          DOCKER_PASSWORD: ${{ secrets.DOC_PASS }}
+#          REPO: orel8654/django-test-pim
+#          DOCKERFILE: ./Dockerfile
+#          tags: latest
 
 
 #        run: |
@@ -29,12 +29,16 @@ jobs:
 #        run: |
 #          docker build --tag django_test .
 
-#  ssh-scp:
-#    steps:
-#      - uses: actions/checkout@v2
-#      - run: set -eu
-#      - run: mkdir "$HOME/.ssh"
-#      - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
-#      - run: chmod 600 "$HOME/.ssh/KEY_REG"
-#
-#      - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
+  ssh-scp:
+    steps:
+      - uses: actions/checkout@v2
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
+      - run: chmod 600 "$HOME/.ssh/KEY_REG"
+#      - run: ssh -i $HOME/.ssh/KEY_REG root@37-140-195-145.cloudvps.regruhosting.ru
+      - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
+      - run: cd /opt/testers/
+      - run: docker stop ttt
+      - run: docker build --no-cache -t django-test .
+      - run: docker run -d -p 8020:8020 --name ttt django-test
