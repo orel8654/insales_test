@@ -41,7 +41,13 @@ jobs:
 
   ssh-enter:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Wait / Sleep
+        uses: jakejarvis/wait-action@v0.1.1
+        with:
+          time: '30s'
+
       - name: SSH Remote Commands
         uses: appleboy/ssh-action@v0.1.5
 

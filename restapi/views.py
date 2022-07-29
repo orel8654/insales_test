@@ -28,7 +28,7 @@ class CreateUserAPI(APIView):
         #     EMAIL_HOST_USER,
         #     ['egorao@mail.ru'],
         # )
-        return Response({'status': 'OK', 'some': 'Already!'})
+        return Response({'status': 'OK', 'some': 'Cool!'})
 
 def index(request):
     return render(request)
