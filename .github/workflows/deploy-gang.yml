@@ -42,12 +42,12 @@ jobs:
   ssh-enter:
     runs-on: ubuntu-latest
     steps:
+      uses: appleboy/ssh-action@master
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
       - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
       - run: chmod 600 "$HOME/.ssh/KEY_REG"
 #      - run: ssh -i $HOME/.ssh/KEY_REG root@37-140-195-145.cloudvps.regruhosting.ru
-      uses: appleboy/ssh-action@master
       with:
         host: 37.140.195.145, 37-140-195-145.cloudvps.regruhosting.ru
         username: root
