@@ -12,7 +12,7 @@ jobs:
 
       - run: set -eu
       - run: mkdir "$HOME/.ssh"
-      - run: echo "${{ secrets.deploy_reg }}" > "$HOME/.ssh/deploy_reg"
-      - run: chmod 600 "$HOME/.ssh/deploy_reg"
+      - run: echo "${{ secrets.KEY_REG }}" > "$HOME/.ssh/KEY_REG"
+      - run: chmod 600 "$HOME/.ssh/KEY_REG"
 
-      - run: rsync -e "ssh -i $HOME/.ssh/deploy_reg -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
+      - run: rsync -e "ssh -i $HOME/.ssh/KEY_REG -o StrictHostKeyChecking=no" --archive --compress --delete . root@37-140-195-145.cloudvps.regruhosting.ru:/opt/testers/
