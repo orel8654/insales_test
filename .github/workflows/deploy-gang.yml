@@ -5,19 +5,27 @@ on:
     branches:
       - main
 jobs:
-  build:
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
+
     steps:
-      - uses: docker/build-push-action@v2
-      - name: docker login
-        env:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Docker
+        uses: docker/build-push-action@v2
+        with:
           DOCKER_USER: ${{ secrets.DOC_USER }}
           DOCKER_PASSWORD: ${{ secrets.DOC_PASS }}
-        run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - name: docker build
-        run: |
-          docker build --tag django_test .
+          REPO: orel8654/django-test-pim
+          DOCKERFILE: ./Dockerfile
+          tags: latest
+#        run: |
+#          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+#      - name: docker build
+#        run: |
+#          docker build --tag django_test .
 #    steps:
 #      - uses: actions/checkout@v2
 #      - run: set -eu
